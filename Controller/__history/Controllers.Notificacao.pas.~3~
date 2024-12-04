@@ -1,0 +1,19 @@
+unit Controllers.Notificacao;
+
+interface
+
+uses Horse, Horse.Jhonson, Horse.CORS, System.SysUtils, DataModuleGlobal,
+System.JSON, Controllers.Auth, Horse.JWT;
+
+procedure RegistrarRotas;
+
+implementation
+
+
+procedure RegistrarRotas;
+begin
+  THorse.AddCallback(HorseJWT(Controllers.Auth.cSECRET, THorseJWTConfig.New.SessionClass(TMyClaims)))
+  .Get('/usuarios/notificacoes', ListarNotificacoes);
+end;
+
+end.

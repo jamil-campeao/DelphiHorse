@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/11/25 10:50:34.000.837,=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/11/25 10:51:34.000.332,C:\FarolTI\Servidor\UnitPrincipal.pas=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024/11/25 10:51:34.000.332,C:\FarolTI\Servidor\UnitPrincipal.fmx=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Unit1.fmx</Transaction>
+    <Transaction>2024/11/25 10:51:38.000.519,C:\FarolTI\Servidor\ServidorHorse.dproj=C:\Users\Desenvolvimento\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2024/11/25 11:28:18.000.367,=C:\FarolTI\Servidor\Unit1.pas</Transaction>
+    <Transaction>2024/11/25 11:28:59.000.439,C:\FarolTI\Servidor\Controller\Controllers.Usuario.pas=C:\FarolTI\Servidor\Unit1.pas</Transaction>
+    <Transaction>2024/11/25 11:49:26.000.343,=C:\FarolTI\Servidor\Unit1.pas</Transaction>
+    <Transaction>2024/11/25 11:50:06.000.344,C:\FarolTI\Servidor\DataModule\DataModuleGlobal.pas=C:\FarolTI\Servidor\Unit1.pas</Transaction>
+    <Transaction>2024/11/25 11:50:06.000.344,C:\FarolTI\Servidor\DataModule\DataModuleGlobal.dfm=C:\FarolTI\Servidor\Unit1.dfm</Transaction>
+    <Transaction>2024/11/25 14:59:59.000.080,=C:\FarolTI\Servidor\Units\uMD5.pas</Transaction>
+    <Transaction>2024/11/25 15:09:40.000.097,=C:\FarolTI\Servidor\Unit1.pas</Transaction>
+    <Transaction>2024/11/25 15:09:56.000.002,C:\FarolTI\Servidor\Controller\Controllers.Auth.pas=C:\FarolTI\Servidor\Unit1.pas</Transaction>
+    <Transaction>2024/11/25 17:31:24.000.605,=C:\FarolTI\Servidor\Unit1.pas</Transaction>
+    <Transaction>2024/11/25 17:31:40.000.770,C:\FarolTI\Servidor\Controller\Controllers.Notificacao.pas=C:\FarolTI\Servidor\Unit1.pas</Transaction>
+    <Transaction>2024/11/26 08:42:14.000.589,=C:\FarolTI\Servidor\Unit1.pas</Transaction>
+    <Transaction>2024/11/26 08:42:24.000.632,C:\FarolTI\Servidor\Unit1.pas=C:\FarolTI\Servidor\Controller\Controllers.Cliente.pas</Transaction>
+    <Transaction>2024/11/26 11:14:29.000.766,=C:\FarolTI\Servidor\Unit1.pas</Transaction>
+    <Transaction>2024/11/26 11:14:40.000.823,C:\FarolTI\Servidor\Unit1.pas=C:\FarolTI\Servidor\Controller\Controllers.Produto.pas</Transaction>
+    <Transaction>2024/11/26 14:45:38.000.936,=C:\FarolTI\Servidor\Unit1.pas</Transaction>
+    <Transaction>2024/11/26 14:45:51.000.067,C:\FarolTI\Servidor\Unit1.pas=C:\FarolTI\Servidor\Controller\Controllers.Pedido.pas</Transaction>
+    <Transaction>2024/11/27 09:27:40.960,=C:\FarolTI\Servidor\Unit1.pas</Transaction>
+    <Transaction>2024/11/27 09:27:54.848,C:\FarolTI\Servidor\Controller\Controllers.CondPagto.pas=C:\FarolTI\Servidor\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,21 @@
+unit Controllers.Auth;
+
+interface
+
+uses
+  Horse, Horse.JWT, JOSE.Core.JWT, Jose.Types.JSON, Jose.Core.Builder, System.JSON, System.SysUtils;
+
+const
+  cSECRET = 'PASS@123';
+
+type
+  TMyClaims = class(TJWTClaims)
+    private
+    public
+      property COD_USUARIO: Integer read GetCodUsuario write SetCodUsuario;
+
+  end;
+
+implementation
+
+end.

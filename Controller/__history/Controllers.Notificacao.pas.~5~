@@ -1,0 +1,58 @@
+unit Controllers.Notificacao;
+
+interface
+
+uses Horse, Horse.Jhonson, Horse.CORS, System.SysUtils, DataModuleGlobal,
+System.JSON, Controllers.Auth, Horse.JWT;
+
+procedure RegistrarRotas;
+procedure ListarNotificacoes(Req: THorseRequest; Res: THorseResponse);
+
+implementation
+
+
+procedure RegistrarRotas;
+begin
+  THorse.AddCallback(HorseJWT(Controllers.Auth.cSECRET, THorseJWTConfig.New.SessionClass(TMyClaims)))
+  .Get('/notificacoes', ListarNotificacoes);
+end;
+
+
+procedure ListarNotificacoes(Req: THorseRequest; Res: THorseResponse);
+var
+  DmGlobal: TDMGlobal;
+  vTeste : String;
+  vTeste2: String;
+  vCodUsuario: Integer;
+  vBody, vJsonRet : TJsonObject;
+begin
+  try
+    try
+      DmGlobal := TDMGlobal.Create(Nil);
+
+      vBody   := Req.Body<TJSONObject>;
+      vTeste  := vBody.GetValue<string>('email','');
+      vTeste2 := vBody.GetValue<string>('senha','');
+
+      vJsonRet := DMGlobal.Login(vTeste, vTeste2);
+
+      if vJsonRet.Size = 0 then
+        Res.Send('{"erro": "Email ou senha inválida"}').Status(401)
+      else
+      begin
+        vCodUsuario := vJsonRet.GetValue<Integer>('cod_usuario',0);
+        //Gero o token contendo o cod_usuario
+        vJsonRet.AddPair('token', CriarToken(vCodUsuario));
+
+        Res.Send<TJsonObject>(vJSonRet).Status(200);
+      end;
+
+    except on e: Exception do
+      Res.Send(e.Message).Status(500);
+    end;
+  finally
+    FreeAndNil(DmGlobal);
+  end;
+end;
+
+end.

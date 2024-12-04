@@ -1,0 +1,54 @@
+unit Controllers.CondPagto;
+
+interface
+
+uses Horse, System.SysUtils, DataModuleGlobal, System.JSON,
+Controllers.Auth, Horse.JWT, System.Classes;
+
+procedure RegistrarRotas;
+procedure ListarCondPagto(Req: THorseRequest; Res: THorseResponse);
+
+implementation
+
+procedure RegistrarRotas;
+begin
+  THorse.AddCallback(HorseJWT(Controllers.Auth.cSECRET, THorseJWTConfig.New.SessionClass(TMyClaims)))
+  .Get('/cond-pagto', ListarCondPagto);
+end;
+
+procedure ListarCondPagto(Req: THorseRequest; Res: THorseResponse);
+var
+  DmGlobal: TDMGlobal;
+  vDtUltSincronizacao: String;
+  vPagina, vCodUsuario : Integer;
+begin
+  try
+    try
+      DmGlobal := TDMGlobal.Create(Nil);
+
+      vCodUsuario := GetUsuarioRequest(Req);
+
+      try
+        vDtUltSincronizacao := Req.Query['dt_ult_sincronizacao'];
+      except
+        vDtUltSincronizacao := '';
+      end;
+
+      try
+        vPagina := Req.Query['pagina'].ToInteger;
+      except
+        vPagina := 1;
+      end;
+
+      Res.Send<TJsonArray>(DmGlobal.ListarPedidos(vDtUltSincronizacao, vCodUsuario, vPagina)).Status(200);
+
+    except on e: Exception do
+      Res.Send(e.Message).Status(500);
+    end;
+  finally
+    FreeAndNil(DmGlobal);
+  end;
+end;
+
+
+end.

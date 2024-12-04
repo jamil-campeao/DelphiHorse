@@ -1,0 +1,92 @@
+unit Controllers.Pedido;
+
+interface
+
+uses Horse, System.SysUtils, DataModuleGlobal, System.JSON,
+Controllers.Auth, Horse.JWT, System.Classes;
+
+procedure RegistrarRotas;
+procedure ListarPedidos(Req: THorseRequest; Res: THorseResponse);
+procedure InserirEditarPedido(Req: THorseRequest; Res: THorseResponse);
+
+implementation
+
+procedure RegistrarRotas;
+begin
+  THorse.AddCallback(HorseJWT(Controllers.Auth.cSECRET, THorseJWTConfig.New.SessionClass(TMyClaims)))
+  .Get('/pedidos/sincronizacao', ListarPedidos);
+
+  THorse.AddCallback(HorseJWT(Controllers.Auth.cSECRET, THorseJWTConfig.New.SessionClass(TMyClaims)))
+  .Post('/pedidos/sincronizacao', InserirEditarPedido);
+end;
+
+
+procedure ListarPedidos(Req: THorseRequest; Res: THorseResponse);
+var
+  DmGlobal: TDMGlobal;
+  vDtUltSincronizacao: String;
+  vPagina, vCodUsuario : Integer;
+begin
+  try
+    try
+      DmGlobal := TDMGlobal.Create(Nil);
+
+      vCodUsuario := GetUsuarioRequest(Req);
+
+      try
+        vDtUltSincronizacao := Req.Query['dt_ult_sincronizacao'];
+      except
+        vDtUltSincronizacao := '';
+      end;
+
+      try
+        vPagina := Req.Query['pagina'].ToInteger;
+      except
+        vPagina := 1;
+      end;
+
+      Res.Send<TJsonArray>(DmGlobal.ListarPedidos(vDtUltSincronizacao, vPagina)).Status(200);
+
+    except on e: Exception do
+      Res.Send(e.Message).Status(500);
+    end;
+  finally
+    FreeAndNil(DmGlobal);
+  end;
+end;
+
+procedure InserirEditarPedido(Req: THorseRequest; Res: THorseResponse);
+var
+  DmGlobal: TDMGlobal;
+  vCodUsuario: Integer;
+  vBody, vJsonRet : TJsonObject;
+begin
+  try
+    try
+      DmGlobal    := TDMGlobal.Create(Nil);
+      vCodUsuario := GetUsuarioRequest(Req);
+      vBody       := Req.Body<TJSONObject>;
+
+      vJsonRet := DmGlobal.InserirEditarProduto(vCodUsuario,
+                                                vbody.GetValue<integer>('cod_produto_local',0),
+                                                vbody.GetValue<string>('descricao',''),
+                                                vbody.GetValue<double>('valor',0),
+                                                vbody.GetValue<double>('qtd_estoque',0),
+                                                vbody.GetValue<integer>('cod_produto_oficial',0),
+                                                vbody.GetValue<string>('dt_ult_sincronizacao','')
+                                                );
+
+      vJsonRet.AddPair('cod_produto_local', TJSONNumber.Create(vBody.GetValue<integer>('cod_produto_local',0)));
+
+      {"cod_produto_local": 250, "cod_produto_oficial": 4500}
+      Res.Send<TJsonObject>(vJSonRet).Status(200);
+
+    except on e: Exception do
+      Res.Send(e.Message).Status(500);
+    end;
+  finally
+    FreeAndNil(DmGlobal);
+  end;
+end;
+
+end.

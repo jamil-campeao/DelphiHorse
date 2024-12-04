@@ -1,0 +1,46 @@
+unit Controllers.Auth;
+
+interface
+
+uses
+  Horse, Horse.JWT, JOSE.Core.JWT, Jose.Types.JSON, Jose.Core.Builder, System.JSON, System.SysUtils;
+
+const
+  cSECRET = 'PASS@123';
+
+type
+  TMyClaims = class(TJWTClaims)
+    private
+    function GetCodUsuario: Integer;
+    procedure SetCodUsuario(const Value: Integer);
+    public
+      property COD_USUARIO: Integer read GetCodUsuario write SetCodUsuario;
+
+  end;
+
+  function CriarToken(cod_usuario: Integer): String;
+  function GetUsuarioRequest(Req: THorseRequest): Integer;
+
+implementation
+
+function TMyClaims.GetCodUsuario: Integer;
+begin
+
+end;
+
+procedure TMyClaims.SetCodUsuario(const Value: Integer);
+begin
+
+end;
+
+function CriarToken(cod_usuario: Integer): String;
+begin
+
+end;
+
+function GetUsuarioRequest(Req: THorseRequest): Integer;
+begin
+
+end;
+
+end.

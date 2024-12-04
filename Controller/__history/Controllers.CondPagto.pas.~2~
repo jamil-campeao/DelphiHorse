@@ -1,0 +1,22 @@
+unit Controllers.CondPagto;
+
+interface
+
+uses Horse, System.SysUtils, DataModuleGlobal, System.JSON,
+Controllers.Auth, Horse.JWT, System.Classes;
+
+procedure RegistrarRotas;
+procedure ListarCondPagto(Req: THorseRequest; Res: THorseResponse);
+
+implementation
+
+procedure RegistrarRotas;
+begin
+  THorse.AddCallback(HorseJWT(Controllers.Auth.cSECRET, THorseJWTConfig.New.SessionClass(TMyClaims)))
+  .Get('/pedidos/sincronizacao', ListarCondPagto);
+
+  THorse.AddCallback(HorseJWT(Controllers.Auth.cSECRET, THorseJWTConfig.New.SessionClass(TMyClaims)))
+  .Post('/pedidos/sincronizacao', InserirEditarPedido);
+end;
+
+end.
